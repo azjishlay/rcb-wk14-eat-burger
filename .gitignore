@@ -63,3 +63,8 @@ com_crashlytics_export_strings.xml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+
+!burger/db/schema.sql
+!burger/db/seeds.sql
