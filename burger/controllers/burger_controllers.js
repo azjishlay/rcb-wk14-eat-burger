@@ -1,23 +1,37 @@
 var express = require('express');
 var router = express.Router();
-var burger = require('../models/burger.js');
+var db = require('../models/burger.js');
 
-router.get('/', function(req,res){
-    burger.seeBurger(function(burger_data){
-        res.render('index', {burger_data: burger_data});
-    });
+router.route('/')
+    .get(function(req,res){
+        db.seeBurger(function(burger_data){
+            res.render('index', {burger_data: burger_data});
+        });
 });
 
-router.post('/add', function(req,res){
-    burger.addBurger(req.body.burger_name, function(result){
-        res.redirect('/');
-    });
+router.route('/add')
+    .get(function(req,res){
+        db.seeBurger(function(burger_data){
+            res.render('index', {burger_data: burger_data});
+        });
+    })
+    .post(function(req,res){
+        db.addBurger(req.body.new_burger_name, function(result){
+            res.redirect('/');
+        });
 });
 
-router.put('/eat', function(req,res){
-    burger.eatBurger(req.body.burger_id, function(result){
-        res.redirect('/');
-    });
+router.route('/eat')
+    .put(function(req,res) {
+        db.eatBurger(req.body.burger_id, function (result) {
+            console.log(req.body.burger_id);
+            res.redirect('/');
+        })
+    })
+    .get(function(req,res){
+        db.seeBurger(function(burger_data){
+            res.render('index', {burger_data: burger_data});
+        });
 });
 
 module.exports = router;

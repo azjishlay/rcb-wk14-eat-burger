@@ -1,30 +1,28 @@
-var connection = require('./connection.js');
-
-var tableName = 'burgers';
+var connection = require('../config/connection.js');
 
 var orm = {
 
-    addBurger: function(newBurger,callback){
-        var queryString = "INSERT INTO " + tableName + "(burgerName)" + "VALUES (?);";
-        connection.query(queryString,[newBurger.burgerName,newBurger.devoured,newBurger.date], function(err,result){
-            if (err) throw err;
-            callback(result);
-        });
-    },
-
-    seeBurger: function(callback){
-        var queryString = "SELECT * FROM " + tableName + ";";
+    seeBurger: function(tableInput,cb){
+        var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString,function(err,result){
             if (err) throw err;
-            callback(result);
+            cb(result);
         });
     },
 
-    eatBurger: function(eatenBurger,callback){
-        var queryString = "UPDATE " + tableName + "SET devoured = 1 " + "WHERE burgerName=?;";
+    addBurger: function(tableInput,newBurger,cb){
+        var queryString = "INSERT INTO " + tableInput + " (burgerName)" + " VALUES (?);";
+        connection.query(queryString,[newBurger],function(err,result){
+            if (err) throw err;
+            cb(result);
+        });
+    },
+
+    eatBurger: function(tableInput,eatenBurger,cb){
+        var queryString = "UPDATE " + tableInput + "SET devoured = 1 " + "WHERE id=?;";
         connection.query(queryString,[eatenBurger],function(err,result){
             if (err) throw err;
-            callback(result);
+            cb(result);
         });
     }
 };
