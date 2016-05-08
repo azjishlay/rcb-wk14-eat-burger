@@ -1,0 +1,56 @@
+<div class="row" style="position: absolute; min-height: 100%; height: 100%; width: 100%; top: 0">
+
+    <div class="col s12 m5 white" style="min-height: 100%; height: 100%">
+
+        <!--LOGO-->
+        <div class="row">
+            <div class="col s12" style="padding: 10px">
+                Burger App
+            </div>
+        </div>
+
+        <!--ADD BURGER SECTION-->
+        <div class="row" style="margin-bottom: 0;">
+            <div class="col s12" style="padding: 0 10%">
+                <form action="/add" method="POST">
+                    <input type="text"
+                           class="index_add blink"
+                           name="new_burger_name"
+                           id=""
+                           placeholder="What kind of burger do you want to eat?">
+                    <button type="submit"
+                            class="btn"
+                            id="">Add to menu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m7 teal" style="min-height: 100%; height: 100%; padding: 10% 5%">
+
+        <!--SEE BURGER SECTION-->
+        <div>
+            <div>
+                {{#each burger_data}}
+                    {{#if this.devoured}}
+                        <!--EATEN BURGER SECTION-->
+                        <div>
+                            <pre>{{this.id}}. {{this.burgerName}}</pre>
+                        </div>
+
+                    {{else}}
+
+                        <!--AVAILABLE BURGER SECTION-->
+                        <div>
+                            <pre>{{this.id}}. {{this.burgerName}}</pre>
+                            <form method="PUT" action="/eat">
+                                <input type="hidden" type="text" name="burger_id" value={{this.id}}>
+                                <button type="submit" class="btn">Eat</button>
+                            </form>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
