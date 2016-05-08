@@ -33,6 +33,7 @@
             <div>
                 {{#each burger_data}}
                     {{#if this.devoured}}
+
                         <!--EATEN BURGER SECTION-->
                         <div>
                             <pre>{{this.id}}. {{this.burgerName}}</pre>
@@ -43,7 +44,7 @@
                         <!--AVAILABLE BURGER SECTION-->
                         <div>
                             <pre>{{this.id}}. {{this.burgerName}}</pre>
-                            <form method="PUT" action="/eat">
+                            <form method="POST" action="/eat?_method=PUT">
                                 <input type="hidden" type="text" name="burger_id" value={{this.id}}>
                                 <button type="submit" class="btn">Eat</button>
                             </form>

@@ -1,7 +1,7 @@
 // DEPENDENCIES
 var express = require('express');
 var path = require('path');
-// var methodOverride = require('method-override');
+var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 
@@ -12,8 +12,8 @@ var connection = require('./burger/config/connection.js');
 
 // MIDDLEWARE
 var app = express();
-app.use(bodyParser.urlencoded({extended: false}));
-// app.use(methodOverride('method'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 // HANDLEBARS
 var exphbs = require('express-handlebars');
@@ -31,8 +31,8 @@ app.use('/',routes);
 app.get('/',routes);
 app.get('/add',routes);
 app.post('/add',routes);
-app.get('/eat',routes);
 app.put('/eat',routes);
+app.get('/eat',routes);
 
 // CONFIRMATION
 var PORT = process.env.NODE_ENV || 3000;

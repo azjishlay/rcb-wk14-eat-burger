@@ -8,12 +8,12 @@ var burgers = {
         })
     },
 
-    addBurger: function(newBurger,cb){
-        orm.addBurger('burgers',newBurger,cb);
+    addBurger: function(nameInput,cb){
+        orm.addBurger('burgers',nameInput,cb);
     },
 
-    eatBurger: function(eatenBurger,cb){
-        orm.eatBurger('burgers',eatenBurger,cb);
+    eatBurger: function(idInput,cb){
+        orm.eatBurger('burgers',idInput,cb);
     }
 };
 
